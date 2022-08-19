@@ -1,8 +1,9 @@
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Header from "./Header";
 import { ToastContainer, Bounce } from "material-react-toastify";
 import "material-react-toastify/dist/ReactToastify.css";
 import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
 
 const Layout = () => {
   return (
@@ -19,9 +20,12 @@ const Layout = () => {
         pauseOnHover
         transition={Bounce}
       />
-      <Stack>
+      <Stack minHeight="100vh">
         <Header />
-        <Outlet />
+        <Stack flexGrow={1}>
+          <Outlet />
+        </Stack>
+        <Footer />
       </Stack>
     </>
   );

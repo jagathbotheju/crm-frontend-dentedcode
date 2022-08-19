@@ -64,7 +64,14 @@ const Login = () => {
 
   return (
     <>
-      <Stack mx="auto" mt="15%" minWidth="30%" spacing={3}>
+      <Stack
+        mx="auto"
+        mt="15%"
+        minWidth={{ xs: "100%", sm: "30%" }}
+        spacing={3}
+        p={5}
+        pt={{ xs: 15, sm: 5 }}
+      >
         {/* login */}
 
         <Stack alignItems="center">
@@ -111,7 +118,10 @@ const Login = () => {
             Sign In
           </Button>
 
-          {/* no account */}
+          {/* forgot password */}
+          <Typography component={Link} to="/reset-password" variant="body2">
+            Forgot Password?
+          </Typography>
           <Typography
             component={Link}
             to="/register"
@@ -119,9 +129,6 @@ const Login = () => {
             sx={{ textDecoration: "none" }}
           >
             Don't have Account ? Register
-          </Typography>
-          <Typography component={Link} to="/reset-password" variant="body2">
-            Forgot Password?
           </Typography>
         </Stack>
       </Stack>
