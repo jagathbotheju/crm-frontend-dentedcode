@@ -15,12 +15,15 @@ import {
   TableBody,
   useTheme,
   TablePagination,
+  Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
 import tickets from "../data/tickets";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -70,9 +73,14 @@ const Dashboard = () => {
               />
 
               {/* add new ticket */}
-              <IconButton disableRipple>
-                <FaPlus />
-              </IconButton>
+              <Tooltip title="Add New Ticket">
+                <IconButton
+                  disableRipple
+                  onClick={() => navigate("/new-ticket")}
+                >
+                  <FaPlus />
+                </IconButton>
+              </Tooltip>
             </Box>
           </Box>
 
