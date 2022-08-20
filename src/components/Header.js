@@ -62,7 +62,7 @@ const Header = () => {
   );
 
   return (
-    <AppBar position="fixed" sx={{ zIndex: theme.zIndex.modal + 1 }}>
+    <AppBar position="static" sx={{ zIndex: theme.zIndex.modal + 1 }}>
       <Toolbar>
         {openDrawer && drawer}
         <IconButton
@@ -82,7 +82,14 @@ const Header = () => {
 
         {/* menus */}
         <Box gap={3} display={{ xs: "none", sm: "flex" }}>
-          <Typography>Dashboard</Typography>
+          <Typography
+            color="inherit"
+            component={Link}
+            to="/dashboard"
+            sx={{ textDecoration: "none" }}
+          >
+            Dashboard
+          </Typography>
           <Typography>Ticket</Typography>
           <Typography>Logout</Typography>
         </Box>
