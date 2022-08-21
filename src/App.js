@@ -4,6 +4,7 @@ import AddNewTicket from "./pages/AddNewTicket";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
+import TicketDetails from "./pages/TicketDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="new-ticket" element={<AddNewTicket />} />
+          <Route path="ticket-details/:id" element={<TicketDetails />} />
         </Route>
       </Routes>
     </>

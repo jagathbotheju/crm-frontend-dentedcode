@@ -20,7 +20,7 @@ import React, { useState } from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import tickets from "../data/tickets";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const Dashboard = () => {
@@ -133,8 +133,10 @@ const Dashboard = () => {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((ticket) => (
                       <TableRow
+                        onClick={() => navigate(`/ticket-details/${ticket.id}`)}
                         hover
                         key={ticket.id}
+                        sx={{ cursor: "pointer" }}
                         // sx={{
                         //   "&:nth-of-type(odd)": {
                         //     backgroundColor: theme.palette.action.hover,
