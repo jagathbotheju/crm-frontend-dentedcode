@@ -13,20 +13,22 @@ import {
   TableHead,
   TableCell,
   TableBody,
-  useTheme,
   TablePagination,
   Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
 import tickets from "../data/tickets";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredTickets, setFilteredTickets] = useState(tickets);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -36,6 +38,17 @@ const Dashboard = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(() => {
+    if (searchTerm) {
+      const result = tickets.filter((ticket) =>
+        ticket.subject.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredTickets(result);
+    } else {
+      setFilteredTickets(tickets);
+    }
+  }, [searchTerm]);
 
   return (
     <>
@@ -62,10 +75,21 @@ const Dashboard = () => {
               {/* search */}
               <TextField
                 id="input-with-icon-textfield"
+                onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <FaSearch />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {searchTerm && (
+                        <IconButton onClick={() => setSearchTerm("")}>
+                          <AiOutlineClose size="1.2rem" />
+                        </IconButton>
+                      )}
                     </InputAdornment>
                   ),
                 }}
@@ -105,7 +129,7 @@ const Dashboard = () => {
 
                 {/* table body */}
                 <TableBody>
-                  {tickets
+                  {filteredTickets
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((ticket) => (
                       <TableRow
